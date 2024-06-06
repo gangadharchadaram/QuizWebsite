@@ -377,9 +377,6 @@ ul{
   }
   
   @media only screen and (max-width: 500px) {
-    .rside{
-        
-    }
     main {
       grid-template-columns: 10px repeat(6, 1fr) 10px;
       grid-gap: 10px;
