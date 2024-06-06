@@ -5,14 +5,87 @@ xmlns:th="http://www.thymeleaf.org">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="/src/main/resources/static/css/index.css">
+	<link rel="stylesheet" href="/src/main/resources/static/css/login.css">
 	<title>Quiz</title>
 </head>
 <body>
     <div class="main-container">
-      
-       <h1>Welcome to Login page</h1>
-       <div th:insert="index.html :: index"></div>
+       <div class="aside">
+        <div class="logo">
+            <a href="#"><span>Q</span>uiz</a>
+        </div>
+        <div class="nav-toggler">
+            <span></span>
+        </div>
+        <ul class="nav">
+            <li><a href="#home" class="active"><i class="fa fa-home"></i>Home</a></li>
+            <li><a href="#services"><i class="fa fa-list"></i>Dashboard</a></li>
+            <li><a href="#portfolio"><i class="fa fa-briefcase"></i>Results</a></li>
+            <li><a href="#contact"><i class="fa fa-comments"></i>Contact</a></li>
+        </ul>
+        <button class="button login__submit">
+            <span class="button__text" onclick="getLogin()">Log Out</span>
+            <i class="button__icon fa fa-sign-out"></i>
+        </button>	
+    </div>
+    <div class="rside">
+        <div class="header header-main">
+            <span class="button__text" onclick="getLogin()">Home</span>
+            <button class="create-quiz-button">
+                <span class="button__text" onclick="getLogin()">Create Quiz</span>
+                
+            </button>	
+        </div>	
+        <div class="card-container">
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-8">
+                <div class="shadow quiz-card-item p-3 mb-3">
+                  <img
+                    src="https://static.javatpoint.com/core/images/java-logo1.png"
+                    class="quiz-image w-100"
+                  />
+                  <h1 class="menu-card-title">Java Quiz</h1>
+                  <p>5 Questions</p>
+                  <a href="" class="menu-item-link">
+                    View All
+                    
+                  </a>
+                </div>
+              </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-8">
+          <div class="shadow quiz-card-item p-3 mb-3">
+            <img
+              src="https://static.javatpoint.com/core/images/java-logo1.png"
+              class="quiz-image w-100"
+            />
+            <h1 class="menu-card-title">React Quiz</h1>
+            <p>5 Questions</p>
+            <a href="" class="menu-item-link">
+              View All
+             
+            </a>
+          </div>
+        </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-6 col-lg-8">
+      <div class="shadow quiz-card-item p-3 mb-3">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIwJYA8gdYB2FEVc92iYCiIfdsWQFqSea1tLRZe7CcfZfeCWsq1VKM1S9hT7XcwNmhdcE&usqp=CAU"
+          class="quiz-image w-100"
+        />
+        <h1 class="menu-card-title">Python Quiz</h1>
+        <p>5 Questions</p>
+        <a href="" class="menu-item-link">
+          View All
+        
+        </a>
+      </div>
+    </div>
+</div>
+
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
