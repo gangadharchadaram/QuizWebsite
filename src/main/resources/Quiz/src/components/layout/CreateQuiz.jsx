@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getSubjects } from "../../utils/QuizService";
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/User.css'
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
+import '../layout/User.css'
+import '../layout/Common.css'
 
 
 const CreateQuiz = () => {

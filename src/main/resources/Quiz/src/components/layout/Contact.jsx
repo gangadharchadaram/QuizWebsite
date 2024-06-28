@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate } from "react-router-dom";
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Contact.css'
+import '../layout/Common.css'
+import '../layout/Contact.css'
 
 const Contact = () => {
 	const navigate = useNavigate()

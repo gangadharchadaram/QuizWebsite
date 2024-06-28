@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
+import '../layout/Common.css'
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { getScoreById, getScores } from "../../utils/QuizService"
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/ScoreBoard.css'
+import '../layout/ScoreBoard.css'
 import axios from "axios"
 
 

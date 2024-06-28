@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import { deleteQuestion, getAllQuestions } from "../../utils/QuizService"
 import { Link, useNavigate } from "react-router-dom"
 import {FaPlus} from "react-icons/fa"
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/GetAllQuestions.css'
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
+import '../layout/GetAllQuestions.css'
+import '../layout/Common.css'
 
 const GetAllQuestions = () => {
 	const [questions, setQuestions] = useState([

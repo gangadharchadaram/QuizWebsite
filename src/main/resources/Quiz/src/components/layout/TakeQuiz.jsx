@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { fetchQuizForUser } from "../../utils/QuizService"
 import AnswerOptions from "../../utils/AnswerOptions"
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/TakeQuiz.css';
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
+import '../layout/TakeQuiz.css';
+import '../layout/Common.css'
 
 
 const TakeQuiz = () => {

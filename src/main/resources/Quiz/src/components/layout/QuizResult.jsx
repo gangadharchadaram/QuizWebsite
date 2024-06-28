@@ -2,8 +2,8 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaBeer } from 'react-icons/fa';
 import axios from "axios";
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/QuizResult.css';
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css';
+import '../layout/QuizResult.css';
+import '../layout/Common.css';
 
 const QuizResult = () => {
     const navigate = useNavigate();

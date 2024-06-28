@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/UserQuiz.css'
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
+import '../layout/UserQuiz.css'
+import '../layout/Common.css'
 
 
 const UserQuiz = () => {

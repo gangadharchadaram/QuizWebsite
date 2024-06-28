@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import logo from '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/images/logistics.png'
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Home.css';
+import logo from '../layout/images/logistics.png'
+import '../layout/Home.css';
 import { useNavigate } from "react-router-dom";
 import Popup from 'reactjs-popup';
 

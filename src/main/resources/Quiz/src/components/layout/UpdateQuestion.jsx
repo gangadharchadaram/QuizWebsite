@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react"
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
+import '../layout/Common.css'
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { getQuestionById, updateQuestion } from "../../utils/QuizService"
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/UpdateQuestion.css'
+import '../layout/UpdateQuestion.css'
 
 const UpdateQuestion = () => {
 	const { id } = useParams()

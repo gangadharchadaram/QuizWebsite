@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { createQuestion, getSubjects } from "../../utils/QuizService";
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
+import '../layout/Common.css'
 
 const AddQuestion = () => {
   const [question, setQuestionText] = useState("");
