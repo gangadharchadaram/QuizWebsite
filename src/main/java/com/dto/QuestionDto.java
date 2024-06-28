@@ -1,4 +1,4 @@
-package com.DTO;
+package com.dto;
 
 public class QuestionDto {
 
