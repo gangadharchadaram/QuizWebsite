@@ -1,7 +1,7 @@
 package com.quiz.controller;
 
-import com.DTO.QuestionDto;
-import com.DTO.QuestionDto2;
+import com.dto.QuestionDto;
+import com.dto.QuestionDto2;
 import com.quiz.model.Question;
 import com.quiz.repository.QuestionRepository;
 
