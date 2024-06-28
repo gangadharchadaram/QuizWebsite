@@ -147,10 +147,9 @@ const handleSubmit = () => {
                     <span></span>
                 </div>
                 <ul className="nav">
-                    <li><a href="/user" className="active"><i className="fa fa-home"></i>Home</a></li>
-                    <li><a href="/take-quiz"><i className="fa fa-list"></i>Quiz</a></li>
-                    <li><a href="#portfolio"><i className="fa fa-briefcase"></i>Results</a></li>
-                    <li><a href="#contact"><i className="fa fa-comments"></i>Contact</a></li>
+                    <li><a href="/user"><i className="fa fa-home"></i>Home</a></li>
+                    <li><a href="/user-quiz" className="active"><i className="fa fa-list"></i>Quiz</a></li>
+                    <li><a href="/contact"><i className="fa fa-comments"></i>Contact</a></li>
                 </ul>
                 <button className="button login__submit">
                     <span className="button__text" onClick={() => goToHome()}>Log Out</span>
@@ -161,9 +160,8 @@ const handleSubmit = () => {
             <div className="rside">
                 <div className="header header-main">
                     <span className="button__text" onclick="getLogin()">Java Quiz</span>
-                    	
             </div>
-            <div className="take-quiz-cobtainer">
+            <div className="take-quiz-container">
 			<h3 className="text-info">
 				Question {quizQuestions.length > 0 ? currentQuestionIndex + 1 : 0} of {quizQuestions.length}
 			</h3>

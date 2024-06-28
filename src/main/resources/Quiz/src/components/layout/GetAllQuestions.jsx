@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react"
 import { deleteQuestion, getAllQuestions } from "../../utils/QuizService"
 import { Link, useNavigate } from "react-router-dom"
 import {FaPlus} from "react-icons/fa"
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/GetAllQuiz.css'
+import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/GetAllQuestions.css'
 import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
 
-const GetAllQuiz = () => {
+const GetAllQuestions = () => {
 	const [questions, setQuestions] = useState([
 		{ id: "", question: "", correctAnswers: "", choices: [] }
 	])
@@ -24,6 +24,7 @@ const GetAllQuiz = () => {
 			const data = await getAllQuestions()
 			setQuestions(data)
 			setIsLoading(false)
+			console.log(data)
 		} catch (error) {
 			console.error(error)
 		}
@@ -59,8 +60,8 @@ const GetAllQuiz = () => {
 				<ul className="nav">
 					<li><a href="/Admin"><i className="fa fa-home"></i>Home</a></li>
 					<li><a href="/create-quiz"><i className="fa fa-home"></i>Quiz</a></li>
-					<li><a href="/all-quizzes" className="active" onClick={() => navigate("/")}><i className="fa fa-list"></i>All Questions</a></li>
-					<li><a href="#portfolio"><i className="fa fa-briefcase"></i>Results</a></li>
+					<li><a href="/all-questions" className="active"><i className="fa fa-list"></i>All Questions</a></li>
+					<li><a href="/scoreboard"><i className="fa fa-briefcase"></i>Results</a></li>
 				</ul>
 				<button className="button login__submit" onClick={() => navigate("/home")}>
 					<span className="button__text">Log Out</span>
@@ -70,9 +71,9 @@ const GetAllQuiz = () => {
 
 			<div className="rside">
 				<div className="header header-main">
-					<span className="button__text" onClick={() => navigate("/")}>All Questions</span>
+					<span className="button__text" >All Questions</span>
 					<div className="col-md-10 d-flex justify-content-end">
-					<Link to={"/create-quiz"}>
+					<Link to={"/create-questions"}>
 						<FaPlus /> Add Question
 					</Link>
 				</div>
@@ -80,13 +81,13 @@ const GetAllQuiz = () => {
 			<hr />
 			<div className="allquestions-container">
 			{isQuestionDeleted && <div className="alert alert-success">{deleteSuccess}</div>}
-			{questions.map((question, index) => (
+			{questions?.map((question, index) => (
 				<div key={question.id}>
 					<pre>
 						<h4 style={{ color: "GrayText" }}>{`${index + 1}. ${question.question}`}</h4>
 					</pre>
 					<ul>
-						{question.choices.map((choice, index) => (
+						{question.choices?.map((choice, index) => (
 							<li key={index}>{choice}</li>
 						))}
 					</ul>
@@ -107,4 +108,4 @@ const GetAllQuiz = () => {
 	)
 }
 
-export default GetAllQuiz
+export default GetAllQuestions

@@ -79,7 +79,7 @@ const UpdateQuestion = () => {
 					<li><a href="/Admin"><i className="fa fa-home"></i>Home</a></li>
 					<li><a href="/create-quiz"><i className="fa fa-home"></i>Quiz</a></li>
 					<li><a href="/all-quizzes" className="active"><i className="fa fa-list"></i>All Questions</a></li>
-					<li><a href="#portfolio"><i className="fa fa-briefcase"></i>Results</a></li>
+					<li><a href="/scoreboard"><i className="fa fa-briefcase"></i>Results</a></li>
 				</ul>
 				<button className="button login__submit" onClick={() => navigate("/home")}>
 					<span className="button__text">Log Out</span>

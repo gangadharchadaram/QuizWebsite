@@ -10,27 +10,31 @@ import lombok.Setter;
 
 import java.util.List;
 
-/**
- * @author Simpson Alfred
- */
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Getter
 @Setter
 @Entity
 public class Question {
+    
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @JsonIgnore
+    private Long questionId;
     @NotBlank
     private String question;
-    @NotBlank
-    private String subject;
+    
     @NotBlank
     private String questionType;
-
 
     @ElementCollection
     private List<String> choices;
 
-
     @ElementCollection
     private List<String> correctAnswers;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    private List<Subject> subjects;
+
+
+    
 }

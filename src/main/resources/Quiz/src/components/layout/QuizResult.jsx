@@ -1,67 +1,87 @@
-import React from "react"
-import { useLocation} from "react-router-dom"
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { FaBeer } from 'react-icons/fa';
+import axios from "axios";
 import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/QuizResult.css';
-import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css'
-import { useNavigate } from "react-router-dom";
+import '/home/gangadhar/quiz/src/main/resources/Quiz/src/components/layout/Common.css';
 
- const QuizResult = () => {
+const QuizResult = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { quizQuestions, totalScores, empName, empId } = location.state;
+    const numQuestions = quizQuestions.length;
+    const percentage = Math.round((totalScores / numQuestions) * 100);
+    const wrongScores = numQuestions - totalScores;
 
-    const navigate = useNavigate()
-    const goToHome =() => {
-        navigate('/home')
-      }
-		const location = useLocation()
-		const { quizQuestions, totalScores } = location.state
-		const numQuestions = quizQuestions.length
-		const percentage = Math.round((totalScores / numQuestions) * 100)
+    const saveScore = async () => {
+        try {
+            await axios.post('YOUR_API_ENDPOINT', {
+                id: empId,
+                empName: empName,
+                score: totalScores
+            });
+            console.log('Score saved successfully');
+        } catch (error) {
+            console.error('Error saving score:', error);
+        }
+    };
 
-		const handleRetakeQuiz = () => {
-			alert("Oops! this functionality was not implemented!!!")
-		}
+    const handleRetakeQuiz = () => {
+        navigate('/user');
+    };
 
-		return (
-			<section className="container mt-5">
-                 <div className="admin-aside">
-                    <div className="admin-logo">
+    React.useEffect(() => {
+        saveScore();
+    }, []);
+
+    return (
+        <section className="container mt-5">
+            <div className="admin-aside">
+                <div className="admin-logo">
                     <a><span>User</span></a>
-                 </div>
+                </div>
                 <div className="nav-toggler">
                     <span></span>
                 </div>
                 <ul className="nav">
-                    <li><a href="/user" className="active"><i className="fa fa-home"></i>Home</a></li>
-                    <li><a href="/take-quiz"><i className="fa fa-list"></i>Quiz</a></li>
-                    <li><a href="/results"><i className="fa fa-briefcase"></i>Results</a></li>
-                    <li><a href="#contact"><i className="fa fa-comments"></i>Contact</a></li>
+                    <li><a href="/user"><i className="fa fa-home"></i>Home</a></li>
+                    <li><a href="/user-quiz" className="active"><i className="fa fa-list"></i>Quiz</a></li>
+                    <li><a href="/contact"><i className="fa fa-comments"></i>Contact</a></li>
                 </ul>
                 <button className="button login__submit">
-                    <span className="button__text" onClick={() => goToHome()}>Log Out</span>
+                    <span className="button__text" onClick={() => navigate('/home')}>Log Out</span>
                     <i className="button__icon fa fa-sign-out"></i>
-                </button>	
+                </button>
             </div>
-    
+
             <div className="rside">
                 <div className="header header-main">
-                    <span className="button__text" onclick="getLogin()">Home</span>
-                    <button className="create-quiz-button" onClick={() => goToCreateQuiz()}>
-                        <span className="button__text">Take Quiz</span>
-                
-                    </button>	
-            </div>
-            <div className="quiz-result-container">
-				<hr />
-				<h5 className="text-info">
-					You answered {totalScores} out of {numQuestions} questions correctly.
-				</h5>
-				<p>Your total score is {percentage}%.</p>
+                    <span className="button__text">Quiz Result</span>
+                    <button className="create-quiz-button" onClick={() => navigate('/user')}>
+                        <span className="button__text">Retake Quiz</span>
+                    </button>
+                </div>
+                <div className="quiz-result-container">
+                    <h5>Quiz has been completed</h5>
+                    <h5>Your Score</h5>
+                    <h5 className="text-info">{totalScores} / {numQuestions}</h5>
+                    <div className="answers-container">
+                        <h3 id="totalQuestions">Total Questions: {numQuestions}</h3>
+                        <h3 id="correctAnswer">Correct Answers: {totalScores}</h3>
+                        <h3 id="remainingval">Wrong Answers: {wrongScores}</h3>
+                    </div>
+                    <h5 className="text-info">
+                        You answered {totalScores} out of {numQuestions} questions correctly.
+                    </h5>
+                    <p>Your total score is {percentage}%.</p>
 
-				<button className="btn btn-primary btn-sm" onClick={handleRetakeQuiz}>
-					Retake this quiz
-				</button>
+                    <button className="btn btn-primary btn-sm" onClick={handleRetakeQuiz}>
+                        Retake this quiz
+                    </button>
+                </div>
             </div>
-            </div>
-			</section>
-		)
- }
+        </section>
+    );
+};
 
- export default QuizResult
+export default QuizResult;

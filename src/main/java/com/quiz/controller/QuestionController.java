@@ -1,83 +1,113 @@
 package com.quiz.controller;
 
+import com.DTO.QuestionDto;
+import com.DTO.QuestionDto2;
 import com.quiz.model.Question;
-import com.quiz.service.IQuestionService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.crossstore.ChangeSetPersister;
-// import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.quiz.repository.QuestionRepository;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
-import java.util.Collections;
+
 import java.util.List;
 import java.util.Optional;
 
-import static org.springframework.http.HttpStatus.CREATED;
-
-/**
- * @author Simpson Alfred
- */
-
 @CrossOrigin("http://localhost:5173")
 @RestController
-@RequestMapping("/api/quizzes")
-@RequiredArgsConstructor
+@RequestMapping("/questions")
 public class QuestionController {
-    private final IQuestionService questionService;
+    @Autowired
+    private QuestionRepository questionRepository;
+
+    @GetMapping("/")
+    public List<QuestionDto> getAllQuestions() {
+       
+        List<Question> questions = questionRepository.findAll();
+        List<QuestionDto> questionDto=new ArrayList<>();
+        for (Question q : questions) {
+            QuestionDto qDto=new QuestionDto();
+            qDto.setQuestionId(q.getQuestionId());
+            qDto.setQuestionType(q.getQuestionType());
+            qDto.setQuestion(q.getQuestion());
+            questionDto.add(qDto);  
+        }
+        return questionDto;
+    }
+
+    @GetMapping("/{id}")
+    public List<QuestionDto> getQuestionById(@PathVariable Long id){
+        List<Question> theQuestion = questionRepository.findByQuestionId(id);
+        List<QuestionDto> qDto=new ArrayList<>();
+        for (Question question : theQuestion) {
+            QuestionDto q=new QuestionDto();
+            q.setQuestionId(question.getQuestionId());
+            q.setQuestion(question.getQuestion());
+            q.setQuestionType(question.getQuestionType());
+            qDto.add(q);
+        }
+        return qDto;
+    }
+    
+
 
     @PostMapping("/create-new-question")
-    public ResponseEntity<Question> createQuestion(@Valid @RequestBody Question question){
-        Question createdQuestion = questionService.createQuestion(question);
-        return ResponseEntity.status(CREATED).body(createdQuestion);
-    }
-
-    @GetMapping("/all-questions")
-    public ResponseEntity<List<Question>> getAllQuestions(){
-        List<Question> questions = questionService.getAllQuestions();
-        return ResponseEntity.ok(questions);
-    }
-
-    @GetMapping("/question/{id}")
-    public ResponseEntity<Question> getQuestionById(@PathVariable Long id) throws ChangeSetPersister.NotFoundException {
-        Optional<Question> theQuestion = questionService.getQuestionById(id);
-        if (theQuestion.isPresent()){
-            return ResponseEntity.ok(theQuestion.get());
-        }else {
-            throw new ChangeSetPersister.NotFoundException();
+    public Question createQuestion( @RequestBody QuestionDto2 questionDto) {
+        try {
+            Question question = new Question();
+            question.setQuestion(questionDto.getQuestion());
+            question.setQuestionType(questionDto.getQuestionType());
+            question.setChoices(questionDto.getChoices());
+            question.setCorrectAnswers(questionDto.getCorrectAnswers());
+            return questionRepository.save(question);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid data");
         }
     }
 
-    @PutMapping("/question/{id}/update")
-    public ResponseEntity<Question> updateQuestion(
-            @PathVariable Long id, @RequestBody Question question) throws ChangeSetPersister.NotFoundException {
-        Question updatedQuestion = questionService.updateQuestion(id, question);
-        return ResponseEntity.ok(updatedQuestion);
+    @PutMapping("/{id}/update")
+    public Question updateQuestion(
+            @PathVariable Long id, @RequestBody QuestionDto2 question) {
+        Optional<Question> updatedQuestion = questionRepository.findById(id);
+        if(updatedQuestion.isPresent()){
+            var q = updatedQuestion.get();
+            q.setQuestion(question.getQuestion());
+            q.setQuestionType(question.getQuestionType());
+            q.setChoices(question.getChoices());
+            q.setCorrectAnswers(question.getCorrectAnswers());
+            questionRepository.save(q);
+            return q;
+        }
+        else{
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid Data");
+        }
     }
 
-    @DeleteMapping("/question/{id}/delete")
-    public ResponseEntity<Void> deleteQuestion(@PathVariable Long id){
-        questionService.deleteQuestion(id);
-        return ResponseEntity.noContent().build();
-    }
-    @GetMapping("/subjects")
-    public ResponseEntity<List<String>> getAllSubjects(){
-        List<String> subjects = questionService.getAllSubjects();
-        return ResponseEntity.ok(subjects);
-    }
 
-    @GetMapping("/quiz/fetch-questions-for-user")
-    public ResponseEntity<List<Question>> getQuestionsForUser(
-            @RequestParam Integer numOfQuestions, @RequestParam String subject){
-        List<Question> allQuestions = questionService.getQuestionsForUser(numOfQuestions, subject);
 
-        List<Question> mutableQuestions = new ArrayList<>(allQuestions);
-        Collections.shuffle(mutableQuestions);
+    @DeleteMapping("/{id}")
+    public void deleteQuestion(@PathVariable("id") Long id){
 
-        int availableQuestions = Math.min(numOfQuestions, mutableQuestions.size());
-        List<Question> randomQuestions = mutableQuestions.subList(0, availableQuestions);
-        return ResponseEntity.ok(randomQuestions);
+        List<Question>  qu=questionRepository.findByQuestionId(id);
+        if(qu==null)
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "id not found");
+        }
+        else{
+            questionRepository.deleteById(id);;
+        }
+
     }
 
 }
+
+
+
+
+
+
+
